@@ -9,22 +9,28 @@ namespace codewars_sumStringsAsNumber
 		[TestMethod]
 		public void Input_1_1_ShouldReturn_2()
 		{
-			AssertShouldBeReturn("2", "1", "1");
+			AssertShouldBeReturn("1", "1", "2");
 		}
 
 		[TestMethod]
 		public void Input_2_2_ShouldReturn_4()
 		{
-			AssertShouldBeReturn("4", "2", "2");
+			AssertShouldBeReturn("2", "2", "4");
 		}
 
 		[TestMethod]
 		public void jsutHaveOneInput_1_shouldReturn_1()
 		{
-			AssertShouldBeReturn("2", "", "2");
+			AssertShouldBeReturn("", "2", "2");
 		}
 
-		private static void AssertShouldBeReturn(string expect, string strInt1, string strInt2)
+		[TestMethod]
+		public void Input_8_123_ShouldReturn_131()
+		{
+			AssertShouldBeReturn("8", "123", "131");
+		}
+
+		private static void AssertShouldBeReturn(string strInt1, string strInt2, string expect)
 		{
 			string accum = (new SumStringsAsNumbers()).Accum(strInt1, strInt2);
 			Assert.AreEqual(expect, accum);
