@@ -44,7 +44,26 @@ namespace codewars_sumStringsAsNumber
 	        AssertShouldBeReturn("7777", "23", "7800");
 	    }
 
-        private static void AssertShouldBeReturn(string strInt1, string strInt2, string expect)
+		[TestMethod]
+		public void Input_123_000234_ShouldReturn_357()
+		{
+			AssertShouldBeReturn("123", "000234", "357");
+		}
+
+
+		[TestMethod]
+		public void Input_1203_1203_ShouldReturn_2406()
+		{
+			AssertShouldBeReturn("1203", "1203", "2406");
+		}
+
+		[TestMethod]
+		public void Input_1298_1203_ShouldReturn_2501()
+		{
+			AssertShouldBeReturn("1298", "1203", "2501");
+		}
+
+		private static void AssertShouldBeReturn(string strInt1, string strInt2, string expect)
 		{
 			string accum = (new SumStringsAsNumbers()).sumStrings(strInt1, strInt2);
 			Assert.AreEqual(expect, accum);
@@ -74,32 +93,28 @@ namespace codewars_sumStringsAsNumber
 		        resultStrInt = $"1{resultStrInt}";
 		    }
 
-		    return resultStrInt;
+		    return resultStrInt.TrimStart('0');
 		}
 
 	    private static bool CaculateAndReturnAddTag(List<char> strIntReverse1, List<char> strIntReverse2, bool addTag, int i, ref string resultStrInt)
 	    {
-	        var digit1 = Digit1(strIntReverse1, i);
-	        var digit2 = Digit1(strIntReverse2, i);
+	        var digit1 = ConverDigit(strIntReverse1, i);
+	        var digit2 = ConverDigit(strIntReverse2, i);
 
             var digitsSum = DigitsSum(digit1, digit2, addTag, ref resultStrInt);
 	        addTag = AddDigit(digitsSum);
 	        return addTag;
 	    }
 
-	    private static char Digit1(List<char> strIntReverse1, int i)
+	    private static char ConverDigit(List<char> strIntReverse, int i)
 	    {
-	        var digit1 = '0';
-	        if (i < strIntReverse1.Count)
-	        {
-	            digit1 = strIntReverse1[i];
-	        }
-	        return digit1;
+		    return i < strIntReverse.Count ? strIntReverse[i] : '0';
+
 	    }
 
 	    private static int DigitsSum(char digit1, char digit2, bool addTag, ref string resultStrInt)
 	    {
-	        var digitsSum = int.Parse(digit1.ToString()) + int.Parse(digit2.ToString());
+			var digitsSum = int.Parse(digit1.ToString()) + int.Parse(digit2.ToString());
 	        digitsSum = addTag ? digitsSum + 1 : digitsSum;
             resultStrInt = $"{digitsSum % 10}{resultStrInt}";
 	        return digitsSum;
