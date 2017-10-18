@@ -63,6 +63,12 @@ namespace codewars_sumStringsAsNumber
 			AssertShouldBeReturn("1298", "1203", "2501");
 		}
 
+		[TestMethod]
+		public void Input_String_Empty_0010_ShouldReturn_10()
+		{
+			AssertShouldBeReturn("", "0010", "10");
+		}
+
 		private static void AssertShouldBeReturn(string strInt1, string strInt2, string expect)
 		{
 			string accum = (new SumStringsAsNumbers()).sumStrings(strInt1, strInt2);
@@ -76,7 +82,7 @@ namespace codewars_sumStringsAsNumber
 		{
 			if (a == String.Empty || b == String.Empty)
 			{
-				return $"{a + b}";
+				return $"{a + b}".TrimStart('0');
 			}
 
 		    var strIntReverse1 = a.Reverse().ToList();
